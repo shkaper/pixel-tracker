@@ -1,0 +1,8 @@
+<div class="container" ng-controller="PixelCtrl">
+    <div class="row marketing">
+        <input ng-model="newPixel.name">
+        <button ng-click="createPixel()">create</button>
+        <!--<a ng-model="getPixels()">get</a>-->
+        <span ng-repeat="pixel in pixels">{{pixel.name}}</span>
+    </div>
+</div>
