@@ -8,6 +8,7 @@ Utilizes MEAN stack (MongoDB, Express, AngularJS, NodeJS).
 + Built project structure 
 + Created placeholder scripts/views/models
 + Implemented basic API
++ Configured Grunt tasks for dev purposes
 
 Still lots of things to do!
 
@@ -15,10 +16,10 @@ Still lots of things to do!
 
 + `npm install`
 + `bower install`
-+ `grunt` to build
 + `mongod` to start MongoDB service
-+ `node server.js` - this both serves web pages and handles API calls
++ `grunt build` to build OR:
++ `grunt serve` to build then start server and watch for file updates
 
 ## External dependencies
 
-+ Grunt, npm, node, MongoDB
++ Grunt, npm, NodeJS, MongoDB
