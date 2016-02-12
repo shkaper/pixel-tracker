@@ -1,44 +1,64 @@
-var Pixel = require('./models/pixel');
 var path = require('path');
+var Pixel = require('./models/pixel');
+
+function getPixels(query, res) {
+    Pixel.find(query, function (err, pixels) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(pixels);
+        }
+    })
+}
 
 module.exports = function (app) {
 
     // server routes ===========================================================
 
-    // sample api route
-    //app.get('/api/pixel', function (req, res) {
-    //    // use mongoose to get all pixels in the database
-    //
-    //});
-
     app.route('/api/pixel')
-        .get(function(req, res) {
-            console.log(req.url);
-            Pixel.find(function (err, result) {
-                if (err)
-                    res.send(err);
-                res.json(result); // return all nerds in JSON format
-            });
+        .get(function (req, res) {
+            getPixels({}, res);
 
         })
-        .post(function(req, res) {
-            console.log(req.url);
-            console.log(JSON.stringify(req.method) + ': ' + JSON.stringify(req.body));
+        .post(function (req, res) {
             var pixel = new Pixel();      // create a new instance of the Pixel model
             pixel.name = req.body.name;  // set the pixel name (comes from the request)
 
-            // save the bear and check for errors
-            pixel.save(function(err) {
-                if (err)
+            // save the pixel and check for errors
+            pixel.save(function (err) {
+                if (err) {
                     res.send(err);
-                res.json({ message: 'Pixel created!' });
+                } else {
+                    res.json({message: 'Pixel created!'});
+                }
             });
-        })
-        .put(function(req, res) {
-            res.send('Update the book');
         });
 
-    // route to handle delete goes here (app.delete)
+    app.route('/api/pixel/:name')
+        .get(function (req, res) {
+            getPixels({name: req.params.name}, res);
+        });
+
+    app.route('/t/:id')
+        .get(function (req, res) {
+            var image = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAgEAAMEBAA7', 'base64');
+            Pixel.findOne({_id: req.params.id}, function (err, pixel) {
+                if (err) {
+                    res.send(err);
+                } else if (pixel === null) {
+                    res.sendStatus(404);
+                } else {
+                    res.type('gif');
+                    res.send(image);
+                    pixel.req_count += 1;
+                    pixel.save(function (err) {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+            })
+        });
 
     // frontend routes =========================================================
     //app.get('/', function (req, res) {
