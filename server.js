@@ -3,7 +3,8 @@ var express        = require('express');
 var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
-var mongoose = require('mongoose');
+var mongoose       = require('mongoose');
+var morgan         = require('morgan');
 
 // configuration ===========================================
 
@@ -12,6 +13,9 @@ var db = require('./config/db');
 
 // set our port
 var port = process.env.PORT || 3001;
+
+// log every request to the console
+app.use(morgan('dev'));
 
 // connect to our mongoDB database
 // (uncomment after you enter in your own credentials in config/db.js)

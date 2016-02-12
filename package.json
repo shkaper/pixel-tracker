@@ -25,6 +25,7 @@
     "jshint-stylish": "^1.0.0",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.2",
+    "morgan": "^1.6.1",
     "time-grunt": "^1.0.0"
   },
   "engines": {
