@@ -1,6 +1,8 @@
 var path = require('path');
 var Pixel = require('./models/pixel');
 
+var image = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAgEAAMEBAA7', 'base64'); //1x1 transparent gif converted to base64
+
 function getPixels(query, res) {
     Pixel.find(query, function (err, pixels) {
         if (err) {
@@ -10,6 +12,7 @@ function getPixels(query, res) {
         }
     })
 }
+
 
 module.exports = function (app) {
 
@@ -39,10 +42,13 @@ module.exports = function (app) {
             getPixels({name: req.params.name}, res);
         });
 
-    app.route('/t/:id')
+    app.route('/t/:name')
         .get(function (req, res) {
-            var image = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAgEAAMEBAA7', 'base64');
-            Pixel.findOne({_id: req.params.id}, function (err, pixel) {
+            var id = req.params.name;
+            if (id.substring(id.length - 4) === '.gif') {
+                id = id.slice(0, -4);
+            }
+            Pixel.findOne({_id: id}, function (err, pixel) {
                 if (err) {
                     res.send(err);
                 } else if (pixel === null) {
