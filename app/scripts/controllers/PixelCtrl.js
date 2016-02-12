@@ -10,10 +10,12 @@ angular.module('pixelTrackerApp')
             function (response) {
                 $scope.pixels = response;
             },
-            function (response) {
+            function () {
             });
 
         $scope.createPixel = function () {
             Pixel.save($scope.newPixel);
-        }
+        };
+
+        $scope.tempVar = 'tempnewnew again';
     }]);

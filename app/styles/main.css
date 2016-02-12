@@ -36,6 +36,7 @@ body {
     padding-top: 19px;
     color: #777;
     border-top: 1px solid #e5e5e5;
+    text-align: center;
 }
 
 .container-narrow > hr {
@@ -60,6 +61,16 @@ body {
 
 .marketing p + h4 {
     margin-top: 28px;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
 }
 
 /* Responsive: Portrait tablets and up */
