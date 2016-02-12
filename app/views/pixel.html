@@ -3,6 +3,22 @@
         <input ng-model="newPixel.name">
         <button ng-click="createPixel()">create</button>
         <!--<a ng-model="getPixels()">get</a>-->
-        <span ng-repeat="pixel in pixels">{{pixel.name}}</span>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Pixel ID</th>
+                    <th>Name</th>
+                    <th>Current request count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pixel in pixels">
+                    <td>{{pixel._id}}</td>
+                    <td>{{pixel.name}}</td>
+                    <td>{{pixel.req_count}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
