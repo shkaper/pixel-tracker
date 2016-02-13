@@ -3,7 +3,7 @@
 angular.module('pixelTrackerApp')
     .controller('PixelCtrl', ['$scope', 'Pixel', function ($scope, Pixel) {
         $scope.newPixel = {
-            name : ''
+            name: ''
         };
 
         $scope.pixels = Pixel.query(
@@ -14,8 +14,10 @@ angular.module('pixelTrackerApp')
             });
 
         $scope.createPixel = function () {
-            Pixel.save($scope.newPixel);
+            Pixel.save($scope.newPixel, function (pixelRet) {
+                $scope.pixels.push(pixelRet);
+            });
+
         };
 
-        $scope.tempVar = 'tempnewnew again';
     }]);

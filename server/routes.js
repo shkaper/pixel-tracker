@@ -28,11 +28,17 @@ module.exports = function (app) {
             pixel.name = req.body.name;  // set the pixel name (comes from the request)
 
             // save the pixel and check for errors
-            pixel.save(function (err) {
+            pixel.save(function (err, pixelRet) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.json({message: 'Pixel created!'});
+                    Pixel.findOne({_id: pixelRet._id}, function (err, pixel){
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.json(pixel);
+                        }
+                    });
                 }
             });
         });
