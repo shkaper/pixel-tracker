@@ -11,14 +11,14 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="#/">pixelTracker</a>
+                <a class="navbar-brand" ui-sref="app">pixelTracker</a>
             </div>
 
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/">Home</a></li>
-                    <li><a ng-href="#/pixel">Create&amp;Track</a></li>
+                    <li ng-class="{'active': activeHome()}"><a ui-sref="app">Home</a></li>
+                    <li ng-class="{'active': activePixel()}"><a ui-sref="app.pixel">Create&amp;Track</a></li>
                 </ul>
             </div>
         </div>

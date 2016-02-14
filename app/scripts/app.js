@@ -1,6 +1,9 @@
 'use strict';
 
 angular.module('pixelTrackerApp', ['ui.router', 'ngResource'])
+    .run(function($rootScope) {
+        $rootScope.pageTitle = 'Home';
+    })
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -9,11 +12,12 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource'])
                 url: '/',
                 views: {
                     'header': {
-                        templateUrl: 'views/header.html'
+                        templateUrl: 'views/header.html',
+                        controller: 'HeaderCtrl'
                     },
                     'content': {
                         templateUrl: 'views/main.html',
-                        controller: 'MainCtrl'
+                        controller: 'HomeCtrl'
                     },
                     'footer': {
                         templateUrl: 'views/footer.html'

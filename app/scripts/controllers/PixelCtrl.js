@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .controller('PixelCtrl', ['$scope', 'Pixel', function ($scope, Pixel) {
+    .controller('PixelCtrl', ['$rootScope', '$scope', 'Pixel', function ($rootScope, $scope, Pixel) {
+
+        $rootScope.pageTitle = 'Pixel';
+
         $scope.newPixel = {
             name: ''
         };
