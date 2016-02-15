@@ -14,6 +14,7 @@ angular.module('pixelTrackerApp')
                 $scope.pixels = response;
             },
             function () {
+                //TODO: handle error
             });
 
         $scope.createPixel = function () {
@@ -24,10 +25,14 @@ angular.module('pixelTrackerApp')
 
         $scope.removePixel = function (id) {
             Pixel.remove({id: id}).$promise.then(
-                function (response) { // jshint ignore:line
-                    //TODO: remove item from the table
+                function () {
+                    for (var i = $scope.pixels.length - 1; i >= 0; i--) {
+                        if ($scope.pixels[i]._id === id) {
+                            $scope.pixels.splice(i, 1);
+                        }
+                    }
                 },
-                function (response) { // jshint ignore:line
+                function () {
                     //TODO: handle error
                 }
             );
