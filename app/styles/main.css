@@ -11,6 +11,7 @@ body {
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
+.page-header,
 .marketing,
 .footer {
     padding-left: 15px;
@@ -54,15 +55,6 @@ body {
     padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
 .navbar .navbar-nav {
     display: inline-block;
     float: none;
@@ -71,6 +63,20 @@ body {
 
 .navbar .navbar-collapse {
     text-align: center;
+}
+
+/* Pixels table */
+table.table tr td div.btn-group {
+    display: none;
+}
+
+table.table tr:hover td div.btn-group {
+    display: inline-block;
+}
+
+.btn-action {
+    padding: 0 0 0 5px;
+    border: 0;
 }
 
 /* Responsive: Portrait tablets and up */
