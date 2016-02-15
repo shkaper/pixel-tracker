@@ -13,6 +13,16 @@ function getPixels(query, res) {
     })
 }
 
+function getSinglePixel(query, res) {
+    Pixel.findOne(query, function (err, pixel){
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(pixel);
+        }
+    });
+}
+
 
 module.exports = function (app) {
 
@@ -32,31 +42,43 @@ module.exports = function (app) {
                 if (err) {
                     res.send(err);
                 } else {
-                    Pixel.findOne({_id: pixelRet._id}, function (err, pixel){
-                        if (err) {
-                            res.send(err);
-                        } else {
-                            res.json(pixel);
-                        }
-                    });
+                    getSinglePixel({_id: pixelRet._id}, res);
                 }
             });
         });
 
-    app.route('/api/pixel/:name')
+    app.route('/api/pixel/:id')
         .get(function (req, res) {
-            getPixels({name: req.params.name}, res);
-        });
+            getSinglePixel({_id: req.params.id}, res);
+        })
+        .delete(function (req, res) {
+            Pixel.findOne({_id: req.params.id}, function (err, pixel) {
+                if (err) {
+                    res.status(500).send(err);
+                } else if (pixel === null) {
+                    res.sendStatus(404);
+                } else {
+                    pixel.remove(function (err) {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+            });
+        })
+    ;
 
-    app.route('/t/:name')
+    app.route('/t/:id')
         .get(function (req, res) {
-            var id = req.params.name;
+            var id = req.params.id;
             if (id.substring(id.length - 4) === '.gif') {
                 id = id.slice(0, -4);
             }
             Pixel.findOne({_id: id}, function (err, pixel) {
                 if (err) {
-                    res.send(err);
+                    res.status(500).send(err);
                 } else if (pixel === null) {
                     res.sendStatus(404);
                 } else {

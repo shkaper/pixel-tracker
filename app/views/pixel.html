@@ -26,10 +26,17 @@
                 <tr class="table-row" ng-repeat="pixel in pixels">
                     <td>{{pixel._id}}</td>
                     <td>{{pixel.name}}</td>
-                    <td><span class="badge">{{pixel.req_count}}</span>
+                    <td>
+                        <span class="badge">{{pixel.req_count}}</span>
                         <div class="btn-group pull-right">
-                            <a class="btn btn-mini btn-action" href="#"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span><span class="sr-only">Close</span></a>
-                            <a class="btn btn-mini btn-action" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="sr-only">Close</span></a>
+                            <a class="btn btn-mini btn-action" href="#" title="Pixel stats">
+                                <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                                <span class="sr-only">Pixel stats</span>
+                            </a>
+                            <a class="btn btn-mini btn-action" ng-click="removePixel(pixel._id)" title="Remove pixel">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                <span class="sr-only">Remove pixel</span>
+                            </a>
                         </div>
                     </td>
                 </tr>
