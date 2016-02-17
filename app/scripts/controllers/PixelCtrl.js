@@ -5,6 +5,9 @@ angular.module('pixelTrackerApp')
 
         $rootScope.pageTitle = 'Pixel';
 
+        var currentHost = location.host;
+        $scope.currentHostTracking = currentHost + '/t/';
+
         $scope.pixelCreated = false;
         $scope.pixelName = '';
 
@@ -33,7 +36,7 @@ angular.module('pixelTrackerApp')
                 $scope.pixels.push(pixelRet);
                 $scope.pixelCreated = true;
                 $scope.newPixelForm.nameInput.$setPristine();
-                $scope.pixelName = 'localhost:3001/t/' + pixelRet._id;
+                $scope.pixelName = $scope.currentHostTracking + pixelRet._id;
             });
         };
 
