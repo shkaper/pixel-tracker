@@ -5,8 +5,18 @@ angular.module('pixelTrackerApp')
 
         $rootScope.pageTitle = 'Pixel';
 
-        $scope.newPixel = {
-            name: ''
+        $scope.pixelCreated = false;
+        $scope.pixelName = '';
+
+        //$scope.isPristine = $scope.newPixelForm.$pristine;
+
+
+        var newPixel = {};
+
+        $scope.clearName = function () {
+            $scope.pixelName = '';
+            $scope.newPixelForm.$setPristine();
+            $scope.pixelCreated = false;
         };
 
         $scope.pixels = Pixel.query(
@@ -18,8 +28,12 @@ angular.module('pixelTrackerApp')
             });
 
         $scope.createPixel = function () {
-            Pixel.save($scope.newPixel, function (pixelRet) {
+            newPixel.name = $scope.pixelName;
+            Pixel.save(newPixel, function (pixelRet) {
                 $scope.pixels.push(pixelRet);
+                $scope.pixelCreated = true;
+                $scope.newPixelForm.nameInput.$setPristine();
+                $scope.pixelName = 'localhost:3001/t/' + pixelRet._id;
             });
         };
 

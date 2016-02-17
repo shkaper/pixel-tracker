@@ -6,7 +6,7 @@
 }
 
 body {
-    padding: 0;
+    padding: 50px 0 0 0;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -65,18 +65,37 @@ body {
     text-align: center;
 }
 
-/* Pixels table */
-table.table tr td div.btn-group {
-    display: none;
+/* Create pixel form */
+
+.input-btn-inline {
+    display: inline-block;
+    position: absolute;
+    right: 100px;
+    top: 17px;
+    color: #999999;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+    z-index: 100;
 }
 
-table.table tr:hover td div.btn-group {
-    display: inline-block;
+.btn-create {
+    width: 90px;
 }
+
+/* Pixels table */
 
 .btn-action {
     padding: 0 0 0 5px;
     border: 0;
+    color: #6e6e6e;
+}
+
+/* Misc */
+
+.row-content {
+    padding-bottom: 40px;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -101,5 +120,14 @@ table.table tr:hover td div.btn-group {
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
+    }
+
+    /* Pixels table displays buttons on hover */
+    table.table tr td div.btn-group {
+        display: none;
+    }
+
+    table.table tr:hover td div.btn-group {
+        display: inline-block;
     }
 }
