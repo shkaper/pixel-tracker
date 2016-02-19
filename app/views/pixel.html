@@ -25,17 +25,29 @@
     </div>
     <div class="row row-content">
         <div class="col-sm-12">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover pixel-table">
                 <thead>
                 <tr>
-                    <th class="col-sm-3 hidden-xs">Pixel ID</th>
+                    <th class="col-sm-3 hidden-xs">Pixel URL</th>
                     <th class="col-sm-5 col-xs-8">Name</th>
                     <th class="col-sm-4 col-xs-4">Current request count</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="table-row" ng-repeat="pixel in pixels">
-                    <td class="col-sm-3 hidden-xs">{{pixel._id}}</td>
+                    <td class="col-sm-3 hidden-xs maxw-180px">
+                        <div ng-show="!showInput" ng-click="toggleInputOn(this)">
+                            {{currentHostTracking + pixel._id}}
+                        </div>
+                        <div ng-show="showInput">
+                            <input type=text ng-model="repeatInput" ng-blur="toggleInputOff(this)"
+                                   focus-on="showInput" ng-value="currentHostTracking + pixel._id">
+                            <a class="btn btn-mini" ng-click="removePixel(pixel._id)" title="Remove pixel">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                <span class="sr-only">Remove pixel</span>
+                            </a>
+                        </div>
+                    </td>
                     <td class="col-sm-5 col-xs-8">{{pixel.name}}</td>
                     <td class="col-sm-4 col-xs-4">
                         <span class="badge">{{pixel.req_count}}</span>

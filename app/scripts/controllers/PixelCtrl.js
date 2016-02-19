@@ -55,4 +55,12 @@ angular.module('pixelTrackerApp')
             );
         };
 
+        $scope.toggleInputOn = function (repeatScope) {
+            repeatScope.showInput = true;
+        };
+
+        $scope.toggleInputOff = function (repeatScope) {
+            repeatScope.showInput = false;
+        };
+
     }]);
