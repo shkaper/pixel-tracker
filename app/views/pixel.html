@@ -40,11 +40,12 @@
                             {{currentHostTracking + pixel._id}}
                         </div>
                         <div ng-show="showInput">
-                            <input type=text ng-model="repeatInput" ng-blur="toggleInputOff(this)"
-                                   focus-on="showInput" ng-value="currentHostTracking + pixel._id">
-                            <a class="btn btn-mini" ng-click="removePixel(pixel._id)" title="Remove pixel">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                <span class="sr-only">Remove pixel</span>
+                            <input type=text id="pixel-input-{{$index}}" ng-blur="toggleInputOff(this)"
+                                   focus-on="focusInput" ng-value="currentHostTracking + pixel._id">
+                            <a class="btn btn-mini btn-success btn-action btn-action-copy" ngclipboard
+                               data-clipboard-target="#pixel-input-{{$index}}"
+                               ngclipboard-success="onCopySuccess(e, this);" title="Copy pixel URL">
+                                Copy
                             </a>
                         </div>
                     </td>

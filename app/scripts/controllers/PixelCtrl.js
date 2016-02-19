@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .controller('PixelCtrl', ['$rootScope', '$scope', 'Pixel', function ($rootScope, $scope, Pixel) {
+    .controller('PixelCtrl', ['$rootScope', '$scope', 'Pixel', '$timeout', function ($rootScope, $scope, Pixel, $timeout) {
 
         $rootScope.pageTitle = 'Pixel';
 
@@ -57,10 +57,26 @@ angular.module('pixelTrackerApp')
 
         $scope.toggleInputOn = function (repeatScope) {
             repeatScope.showInput = true;
+            repeatScope.focusInput = true;
+            repeatScope.isCopied = false;
         };
 
+        //this function is so ugly it makes my eyes bleed
         $scope.toggleInputOff = function (repeatScope) {
-            repeatScope.showInput = false;
+
+            repeatScope.isCopied = false;
+
+            $timeout(function () {
+                if (repeatScope.isCopied === true) {
+                    repeatScope.focusInput = true;
+                } else {
+                    repeatScope.showInput = false;
+                }
+            }, 200);
+        };
+
+        $scope.onCopySuccess = function (e, repeatScope) {
+            repeatScope.isCopied = true;
         };
 
     }]);

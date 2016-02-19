@@ -40,23 +40,48 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
 
         $urlRouterProvider.otherwise('/');
     })
-    .directive('focusOn', function ($timeout, $parse) {
+    .directive('focusOn', function($parse, $timeout) {
+        var NON_ASSIGNABLE_MODEL_EXPRESSION = 'Non-assignable model expression: ';
         return {
-            //scope: true,   // optionally create a child scope
-            link: function (scope, element, attrs) {
-                var model = $parse(attrs.focusOn);
-                scope.$watch(model, function (value) {
-                    console.log('value=', value);
-                    if (value === true) {
-                        $timeout(function () {
-                            element[0].focus();
+            restrict: "A",
+            link: function(scope, element, attr) {
+                var buildGetterSetter = function(name) {
+                    var me = {};
+                    me.get = $parse(name);
+                    me.set = me.get.assign;
+                    if (!me.set) {
+                        throw Error(NON_ASSIGNABLE_MODEL_EXPRESSION + name);
+                    }
+                    return me;
+                };
+
+                // *********** focus ***********
+                var focusStateName = attr.focusOn;
+                var focusState = buildGetterSetter(focusStateName);
+
+                // inititialize the focus state
+                // (oh, if there were only a way to test if an element presently has focus, we'd preset it here...)
+                focusState.set(scope, false);
+
+                // $watch the trigger variable in the controller for a transition
+                scope.$watch(focusStateName, function(newValue, oldValue) { // jshint ignore : line
+                    if ( newValue ) {
+                        $timeout(function() { // a timing workaround hack
+                            element[0].focus(); // without jQuery, need [0]
                         });
                     }
                 });
-                //set attribute value to 'false' on blur event:
-                element.bind('blur', function () {
-                    console.log('blur');
-                    scope.$apply(model.assign(scope, false));
+
+                // wire up listeners for focus and blur events so that we can track the state
+                element.bind('focus', function() {
+                    scope.$apply(function() {
+                        focusState.set(scope, true);
+                    });
+                });
+                element.bind('blur', function() {
+                    scope.$apply(function() {
+                        focusState.set(scope, false);
+                    });
                 });
             }
         };
