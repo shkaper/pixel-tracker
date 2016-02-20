@@ -87,13 +87,27 @@ body {
 /* Pixels table */
 
 .btn-action {
-    padding: 0 0 0 5px;
+    padding: 0 3px 0 3px;
     border: 0;
     color: #6e6e6e;
 }
 
+.btn-action-copy {
+    width: 25%;
+    font-size: 11px;
+    height: 20px;
+    padding: 3px;
+}
+
 .maxw-180px {
     max-width: 180px;
+}
+
+.maxh-20px {
+    max-height: 20px;
+}
+
+.text-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -102,6 +116,7 @@ body {
 table.pixel-table input {
     padding: 0;
     border: 0;
+    width: 70%;
 }
 
 /* Misc */

@@ -8,13 +8,16 @@
                 <div class="input-group input-group-lg col-sm-12">
                     <input ng-model="pixelName" class="form-control" id="nameInput" name="nameInput"
                            placeholder="Enter a name or leave blank for default">
-                    <span ng-if="pixelName > ''" ng-click="clearName()" class="glyphicon glyphicon-remove input-btn-inline"></span>
+                    <span ng-if="pixelName > ''" ng-click="clearName()"
+                          class="glyphicon glyphicon-remove input-btn-inline"></span>
+
                     <div class="input-group-btn">
                         <button ng-click="createPixel()" ng-if="newPixelForm.nameInput.$dirty || !pixelCreated"
                                 class="btn btn-success btn-lg btn-create" type="button">
                             Create
                         </button>
-                        <button ng-if="pixelCreated && newPixelForm.nameInput.$pristine" class="btn btn-warning btn-lg btn-create"
+                        <button ng-if="pixelCreated && newPixelForm.nameInput.$pristine"
+                                class="btn btn-warning btn-lg btn-create"
                                 type="button" ngclipboard data-clipboard-target="#nameInput">
                             Copy
                         </button>
@@ -36,16 +39,16 @@
                 <tbody>
                 <tr class="table-row" ng-repeat="pixel in pixels">
                     <td class="col-sm-3 hidden-xs maxw-180px">
-                        <div ng-show="!showInput" ng-click="toggleInputOn(this)">
+                        <div class="text-ellipsis" ng-show="!showInput" ng-click="toggleInputOn(this)">
                             {{currentHostTracking + pixel._id}}
                         </div>
-                        <div ng-show="showInput">
+                        <div class="maxh-20px" ng-show="showInput">
                             <input type=text id="pixel-input-{{$index}}" ng-blur="toggleInputOff(this)"
                                    focus-on="focusInput" ng-value="currentHostTracking + pixel._id">
-                            <a class="btn btn-mini btn-success btn-action btn-action-copy" ngclipboard
+                            <a class="btn btn-mini btn-success btn-action-copy" ngclipboard
                                data-clipboard-target="#pixel-input-{{$index}}"
                                ngclipboard-success="onCopySuccess(e, this);" title="Copy pixel URL">
-                                Copy
+                                COPY
                             </a>
                         </div>
                     </td>
