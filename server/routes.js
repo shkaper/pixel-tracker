@@ -35,7 +35,10 @@ module.exports = function (app) {
         })
         .post(function (req, res) {
             var pixel = new Pixel();      // create a new instance of the Pixel model
-            pixel.name = req.body.name;  // set the pixel name (comes from the request)
+            console.log(req.body.name);
+            if (req.body.name !== '') {
+                pixel.name = req.body.name;  // set the pixel name (comes from the request)
+            }
 
             // save the pixel and check for errors
             pixel.save(function (err, pixelRet) {
