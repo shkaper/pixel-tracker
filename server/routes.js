@@ -80,9 +80,9 @@ module.exports = function (app) {
                 id = id.slice(0, -4);
             }
             Pixel.findOne({_id: id}, function (err, pixel) {
-                if (err) {
+                if (err && err.name !== 'CastError') {
                     res.status(500).send(err);
-                } else if (pixel === null) {
+                } else if (pixel === null || err.name === 'CastError') {
                     res.sendStatus(404);
                 } else {
                     res.type('gif');
