@@ -14,7 +14,7 @@ function getPixels(query, res) {
 }
 
 function getSinglePixel(query, res) {
-    Pixel.findOne(query, function (err, pixel){
+    Pixel.findOne(query, function (err, pixel) {
         if (err) {
             res.send(err);
         } else {
@@ -82,12 +82,20 @@ module.exports = function (app) {
             Pixel.findOne({_id: id}, function (err, pixel) {
                 if (err && err.name !== 'CastError') {
                     res.status(500).send(err);
-                } else if (pixel === null || err.name === 'CastError') {
+                } else if (pixel === null || (err && err.name === 'CastError')) {
                     res.sendStatus(404);
                 } else {
                     res.type('gif');
                     res.send(image);
+                    var date = new Date();
+                    var request = {
+                        clientIp: req.ip,
+                        clientHeaders: JSON.stringify(req.headers),
+                        timestamp: date.toDateString()
+                    };
+
                     pixel.req_count += 1;
+                    pixel.requests.push(request);
                     pixel.save(function (err) {
                         if (err) {
                             console.error(err);
