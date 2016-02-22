@@ -26,13 +26,24 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
 
             })
 
-            // route for the contactus page
+            // route for the pixels page
             .state('app.pixel', {
                 url: 'pixel',
                 views: {
                     'content@': {
                         templateUrl: 'views/pixel.html',
                         controller: 'PixelCtrl'
+                    }
+                }
+            })
+
+            // route for the stats page
+            .state('app.stats', {
+                url: 'stats/:id',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/stats.html',
+                        controller: 'StatsCtrl'
                     }
                 }
             });

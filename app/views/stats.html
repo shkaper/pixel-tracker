@@ -1,0 +1,32 @@
+<div class="container" ng-controller="StatsCtrl">
+    <div class="row row-content">
+        <div class="page-header text-center">
+            <h1>Pixel statistics: {{pixel.name}}</h1>
+        </div>
+        <div class="col-sm-12">
+            <p>URL: {{currentHostTracking + pixel._id + '.gif'}}</p>
+
+            <p>Requests: {{pixel.req_count}}</p>
+        </div>
+    </div>
+    <div class="row row-content">
+        <div class="col-sm-12">
+            <div class="panel-group">
+                <div ng-repeat="request in pixel.requests" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-toggle="collapse" data-target="#collapse-{{$index}}">{{request.timestamp}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse-{{$index}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>{{request.clientIp}}</p>
+                            <p>{{request.clientHeaders}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

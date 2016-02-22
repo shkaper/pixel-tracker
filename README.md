@@ -5,12 +5,18 @@ Utilizes MEAN stack (MongoDB, Express, AngularJS, NodeJS).
 
 ## Current state
 
-+ Built project structure 
-+ Created placeholder scripts/views/models
-+ Implemented basic API
+Done:
++ Home, pixels creation, pixel statistics pages
++ Pixels serving
++ Implemented API
 + Configured Grunt tasks for dev purposes
 
-Still lots of things to do!
+TODO:
++ Stats design
++ Pagination
++ Filtering and sorting
++ Authentication
++ Deployment to heroku
 
 ## Build and development
 
