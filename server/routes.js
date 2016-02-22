@@ -91,7 +91,7 @@ module.exports = function (app) {
                     var request = {
                         clientIp: req.ip,
                         clientHeaders: JSON.stringify(req.headers),
-                        timestamp: date.toDateString()
+                        timestamp: date.toUTCString()
                     };
 
                     pixel.req_count += 1;
