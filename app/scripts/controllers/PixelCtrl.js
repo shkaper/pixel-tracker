@@ -36,7 +36,7 @@ angular.module('pixelTrackerApp')
                 $scope.pixels.push(pixelRet);
                 $scope.pixelCreated = true;
                 $scope.newPixelForm.nameInput.$setPristine();
-                $scope.pixelName = $scope.currentHostTracking + pixelRet._id;
+                $scope.pixelName = $scope.currentHostTracking + pixelRet._id + '.gif';
             });
         };
 
