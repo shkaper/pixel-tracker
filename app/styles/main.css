@@ -119,10 +119,24 @@ table.pixel-table input {
     width: 70%;
 }
 
+/* Stats */
+
+.panel-body {
+    overflow: auto;
+}
+
+.icon-right {
+    float: right;
+}
+
 /* Misc */
 
 .row-content {
     padding-bottom: 40px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 /* Responsive: Portrait tablets and up */

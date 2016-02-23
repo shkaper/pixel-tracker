@@ -11,6 +11,9 @@ angular.module('pixelTrackerApp')
         $scope.pixel = Pixel.get({id: $stateParams.id}).$promise.then(
             function (response) {
                 $scope.pixel = response;
+                for (var i = 0; i < $scope.pixel.requests.length; ++i) {
+                    $scope.pixel.requests[i].clientHeaders = JSON.stringify(JSON.parse(response.requests[0].clientHeaders), null, 2);
+                }
             },
             function () {
                 //TODO: handle error
@@ -29,6 +32,13 @@ angular.module('pixelTrackerApp')
                     //TODO: handle error
                 }
             );
+        };
+
+        $scope.toggleCollapsed = function (repeatScope) {
+            if (repeatScope.isCollapsed === undefined) {
+                repeatScope.isCollapsed = true;
+            }
+            repeatScope.isCollapsed = !repeatScope.isCollapsed;
         };
 
     }]);

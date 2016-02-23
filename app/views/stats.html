@@ -15,13 +15,19 @@
                 <div ng-repeat="request in pixel.requests" class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-toggle="collapse" data-target="#collapse-{{$index}}">{{request.timestamp}}</a>
+                            <a class="cursor-pointer" data-toggle="collapse" ng-click="toggleCollapsed(this)" data-target="#collapse-{{$index}}">
+                                {{request.timestamp}}
+                                <span ng-class="{'glyphicon-chevron-up': !isCollapsed, 'glyphicon-chevron-down': isCollapsed || isCollapsed === undefined}"
+                                      class="glyphicon icon-right" aria-hidden="true"></span>
+                            </a>
                         </h4>
                     </div>
                     <div id="collapse-{{$index}}" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <p>{{request.clientIp}}</p>
-                            <p>{{request.clientHeaders}}</p>
+                            <h4>Client IP address:</h4>
+                            <pre>{{request.clientIp}}</pre>
+                            <h4>Request headers:</h4>
+                            <pre>{{request.clientHeaders}}</pre>
                         </div>
                     </div>
                 </div>
