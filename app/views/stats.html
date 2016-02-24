@@ -4,18 +4,33 @@
             <h1>Pixel statistics: {{pixel.name}}</h1>
         </div>
         <div class="col-sm-12">
-            <p>URL: {{currentHostTracking + pixel._id + '.gif'}}</p>
+            <form>
+                <div class="input-group input-group-lg col-sm-12">
+                    <input class="form-control" id="URLInput" name="URLInput"
+                           placeholder="{{currentHostTracking + pixel._id + '.gif'}}" readonly>
 
-            <p>Requests: {{pixel.req_count}}</p>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary btn-lg btn-create"
+                                type="button" ngclipboard
+                                data-clipboard-text="{{currentHostTracking + pixel._id + '.gif'}}">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="row row-content">
+        <div class="col-sm-4 col-sm-offset-4">
+            <h2>Requests: <span class="badge">{{pixel.req_count}}</span></h2>
+        </div>
         <div class="col-sm-12">
             <div class="panel-group">
                 <div ng-repeat="request in pixel.requests" class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="cursor-pointer" data-toggle="collapse" ng-click="toggleCollapsed(this)" data-target="#collapse-{{$index}}">
+                            <a class="cursor-pointer" data-toggle="collapse" ng-click="toggleCollapsed(this)"
+                               data-target="#collapse-{{$index}}">
                                 {{request.timestamp}}
                                 <span ng-class="{'glyphicon-chevron-up': !isCollapsed, 'glyphicon-chevron-down': isCollapsed || isCollapsed === undefined}"
                                       class="glyphicon icon-right" aria-hidden="true"></span>

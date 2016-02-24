@@ -139,6 +139,10 @@ table.pixel-table input {
     cursor: pointer;
 }
 
+h2 span.badge {
+    font-size: inherit;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
