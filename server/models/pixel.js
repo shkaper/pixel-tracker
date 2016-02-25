@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RequestSchema = new Schema({
+        _pixel: {type: Schema.Types.ObjectId, ref: 'Pixel'},
         clientIp: String,
         clientHeaders: String,
         timestamp: Date
@@ -13,10 +14,13 @@ var RequestSchema = new Schema({
 var PixelSchema = new Schema({
         name: {type: String, default: 'pixel' + Date.now()},
         req_count: {type: Number, default: 0},
-        requests: [RequestSchema]
+        requests: [{type: Schema.Types.ObjectId, ref: 'Request'}]
     }, {
         timestamps: {createdAt: 'created_at'}
     }
 );
 
-module.exports = mongoose.model('Pixel', PixelSchema);
+module.exports = {
+    Pixel: mongoose.model('Pixel', PixelSchema),
+    Request: mongoose.model('Request', RequestSchema)
+};
