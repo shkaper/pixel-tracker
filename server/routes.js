@@ -4,13 +4,32 @@ var Request = require('./models/pixel');
 
 const IMAGE = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAgEAAMEBAA7', 'base64'); //1x1 transparent gif converted to base64
 
-function getPixels(query, res) {
+function getPixelsPaginate(req, res) {
+    var perPage = req.query.perPage,
+        page = Math.max(1, req.query.page);
+
     Model.Pixel
-        .find(query, function (err, pixels) {
+        .find()
+        .sort('-created_at')
+        .limit(perPage)
+        .skip(perPage * (page - 1))
+        .exec(function (err, pixels) {
             if (err) {
                 res.send(err);
             } else {
-                res.json(pixels);
+                Model.Pixel
+                    .count(function (err, count) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.json({
+                                page: page,
+                                pagesTotal: Math.ceil(count / perPage),
+                                pixelsCount: count,
+                                pixels: pixels
+                            })
+                        }
+                    })
             }
         })
 }
@@ -55,7 +74,7 @@ module.exports = function (app) {
 
     app.route('/api/pixel')
         .get(function (req, res) {
-            getPixels({}, res);
+            getPixelsPaginate(req, res);
 
         })
         .post(function (req, res) {
