@@ -11,9 +11,6 @@ angular.module('pixelTrackerApp')
         $scope.pixelCreated = false;
         $scope.pixelName = '';
 
-        //$scope.isPristine = $scope.newPixelForm.$pristine;
-
-
         var newPixel = {};
 
         $scope.clearName = function () {
@@ -21,14 +18,6 @@ angular.module('pixelTrackerApp')
             $scope.newPixelForm.$setPristine();
             $scope.pixelCreated = false;
         };
-
-        $scope.pixels = Pixel.query(
-            function (response) {
-                $scope.pixels = response;
-            },
-            function () {
-                //TODO: handle error
-            });
 
         $scope.createPixel = function () {
             newPixel.name = $scope.pixelName;
@@ -54,6 +43,42 @@ angular.module('pixelTrackerApp')
                 }
             );
         };
+
+        //pixels & pagination
+
+        $scope.pixels = {};
+        $scope.pixelsPage = 1;
+        $scope.pixelsPerPage = 5;
+        $scope.pixelsPagesTotal = 1;
+
+        $scope.getPixelsPage = function (page, perPage) {
+            $scope.pixels = Pixel.get(
+                {
+                    perPage: perPage,
+                    page: page
+                },
+                function (response) {
+                    $scope.pixels = response.pixels;
+                    $scope.pixelsPage = response.page;
+                    $scope.pixelsPagesTotal = response.pagesTotal;
+                    console.log("pixels ", response.pixels);
+                    console.log("page ", response.page);
+                    console.log("pagesTotal ", response.pagesTotal);
+                },
+                function () {
+                    //TODO: handle error
+                });
+        };
+
+        //init table
+
+        $scope.getPixelsPage($scope.pixelsPage, $scope.pixelsPerPage);
+
+        $scope.range = function(n) {
+            return new Array(n);
+        };
+
+        //table functions
 
         $scope.toggleInputOn = function (repeatScope) {
             repeatScope.showInput = true;

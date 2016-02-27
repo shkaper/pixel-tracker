@@ -119,6 +119,14 @@ table.pixel-table input {
     width: 70%;
 }
 
+table.pixel-table {
+    margin: 0;
+}
+
+.pagination {
+    margin-top: 15px;
+}
+
 /* Stats */
 
 .panel-body {
@@ -141,6 +149,10 @@ table.pixel-table input {
 
 h2 span.badge {
     font-size: inherit;
+}
+
+.align-right {
+    text-align: right;
 }
 
 /* Responsive: Portrait tablets and up */

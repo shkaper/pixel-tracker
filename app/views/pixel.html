@@ -28,7 +28,7 @@
     </div>
     <div class="row row-content">
         <div class="col-sm-12">
-            <table class="table table-striped table-hover pixel-table">
+            <table class="table table-striped table-hover table-bordered pixel-table">
                 <thead>
                 <tr>
                     <th class="col-sm-3 hidden-xs">Pixel URL</th>
@@ -70,6 +70,26 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="col-sm-6 col-sm-push-6 align-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage - 1, pixelsPerPage)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li ng-repeat="page in range(pixelsPagesTotal) track by $index">
+                        <a class="cursor-pointer" ng-click="getPixelsPage($index + 1, pixelsPerPage)">{{$index+1}}</a>
+                    </li>
+                    <li>
+                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage + 1, pixelsPerPage)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
     </div>
