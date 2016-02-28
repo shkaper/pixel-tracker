@@ -72,19 +72,25 @@
             </table>
         </div>
 
-        <div class="col-sm-6 col-sm-push-6 align-right">
+        <div class="col-sm-6">Showing {{(pixelsPerPage * (pixelsPage - 1)) + 1}} to {{pixelsPerPage * pixelsPage}} of
+            {{pixelsTotal}} pixels
+        </div>
+        <div class="col-sm-6 align-right">
             <nav>
                 <ul class="pagination">
                     <li>
-                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage - 1, pixelsPerPage)" aria-label="Previous">
+                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage - 1, pixelsPerPage)"
+                           aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li ng-repeat="page in range(pixelsPagesTotal) track by $index">
+                    <li ng-class="{'active': ($index+1) === pixelsPage}"
+                        ng-repeat="page in range(pixelsPagesTotal) track by $index">
                         <a class="cursor-pointer" ng-click="getPixelsPage($index + 1, pixelsPerPage)">{{$index+1}}</a>
                     </li>
                     <li>
-                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage + 1, pixelsPerPage)" aria-label="Next">
+                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage + 1, pixelsPerPage)"
+                           aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

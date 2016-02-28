@@ -50,6 +50,7 @@ angular.module('pixelTrackerApp')
         $scope.pixelsPage = 1;
         $scope.pixelsPerPage = 5;
         $scope.pixelsPagesTotal = 1;
+        $scope.pixelsTotal = 0;
 
         $scope.getPixelsPage = function (page, perPage) {
             $scope.pixels = Pixel.get(
@@ -61,6 +62,7 @@ angular.module('pixelTrackerApp')
                     $scope.pixels = response.pixels;
                     $scope.pixelsPage = response.page;
                     $scope.pixelsPagesTotal = response.pagesTotal;
+                    $scope.pixelsTotal = response.pixelsCount;
                     console.log("pixels ", response.pixels);
                     console.log("page ", response.page);
                     console.log("pagesTotal ", response.pagesTotal);
