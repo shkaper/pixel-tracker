@@ -72,7 +72,8 @@
             </table>
         </div>
 
-        <div class="col-sm-6">Showing {{(pixelsPerPage * (pixelsPage - 1)) + 1}} to {{pixelsPerPage * pixelsPage}} of
+        <div class="col-sm-6">Showing {{(pixelsPerPage * (pixelsPage - 1)) + 1}} to
+            {{pixelsPerPage * pixelsPage < pixelsTotal ? pixelsPerPage * pixelsPage : pixelsTotal}} of
             {{pixelsTotal}} pixels
         </div>
         <div class="col-sm-6 align-right">
