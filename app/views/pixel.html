@@ -79,7 +79,7 @@
             <nav>
                 <ul class="pagination">
                     <li>
-                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage - 1, pixelsPerPage)"
+                        <a class="cursor-pointer" ng-click="pixelsPage === 1 || getPixelsPage(pixelsPage - 1, pixelsPerPage)"
                            aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
@@ -89,7 +89,7 @@
                         <a class="cursor-pointer" ng-click="getPixelsPage($index + 1, pixelsPerPage)">{{$index+1}}</a>
                     </li>
                     <li>
-                        <a class="cursor-pointer" ng-click="getPixelsPage(pixelsPage + 1, pixelsPerPage)"
+                        <a class="cursor-pointer" ng-click="pixelsPage === pixelsPagesTotal || getPixelsPage(pixelsPage + 1, pixelsPerPage)"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
