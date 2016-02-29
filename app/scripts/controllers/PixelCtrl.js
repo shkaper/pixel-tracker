@@ -53,7 +53,7 @@ angular.module('pixelTrackerApp')
         $scope.pixelsTotal = 0;
 
         $scope.getPixelsPage = function (page, perPage) {
-            $scope.pixels = Pixel.get(
+            Pixel.get(
                 {
                     perPage: perPage,
                     page: page
