@@ -22,7 +22,7 @@ angular.module('pixelTrackerApp')
         $scope.createPixel = function () {
             newPixel.name = $scope.pixelName;
             Pixel.save(newPixel, function (pixelRet) {
-                $scope.pixels.push(pixelRet);
+                $scope.pixels.unshift(pixelRet);
                 $scope.pixelCreated = true;
                 $scope.newPixelForm.nameInput.$setPristine();
                 $scope.pixelName = $scope.currentHostTracking + pixelRet._id + '.gif';

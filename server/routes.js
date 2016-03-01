@@ -81,6 +81,8 @@ module.exports = function (app) {
             var pixel = new Model.Pixel();      // create a new instance of the Pixel model
             if (req.body.name !== '') {
                 pixel.name = req.body.name;  // set the pixel name (comes from the request)
+            } else {
+                pixel.name = Date.now().toString();
             }
 
             // save the pixel and check for errors

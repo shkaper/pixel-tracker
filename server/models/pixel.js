@@ -12,7 +12,7 @@ var RequestSchema = new Schema({
 );
 
 var PixelSchema = new Schema({
-        name: {type: String, default: 'pixel' + Date.now()},
+        name: {type: String},
         req_count: {type: Number, default: 0},
         requests: [{type: Schema.Types.ObjectId, ref: 'Request'}]
     }, {

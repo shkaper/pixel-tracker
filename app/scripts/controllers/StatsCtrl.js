@@ -12,7 +12,7 @@ angular.module('pixelTrackerApp')
             function (response) {
                 $scope.pixel = response;
                 for (var i = 0; i < $scope.pixel.requests.length; ++i) {
-                    $scope.pixel.requests[i].clientHeaders = JSON.stringify(JSON.parse(response.requests[0].clientHeaders), null, 2);
+                    $scope.pixel.requests[i].clientHeaders = JSON.stringify(JSON.parse(response.requests[i].clientHeaders), null, 2);
                 }
             },
             function () {
