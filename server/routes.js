@@ -34,6 +34,37 @@ function getPixelsPaginate(req, res) {
         })
 }
 
+function getRequestsPaginate(req, res) {
+    var perPage = req.query.perPage,
+        page = Math.max(1, req.query.page);
+
+    Model.Request
+        .find({_pixel: req.params.id})
+        .sort('-timestamp')
+        .limit(perPage)
+        .skip(perPage * (page - 1))
+        .exec(function (err, requests) {
+            if (err) {
+                res.send(err);
+            } else {
+                Model.Request
+                    .where({_pixel: req.params.id})
+                    .count(function (err, count) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.json({
+                                page: page,
+                                pagesTotal: Math.ceil(count / perPage),
+                                requestsCount: count,
+                                requests: requests
+                            })
+                        }
+                    })
+            }
+        })
+}
+
 function getSinglePixel(query, res) {
     Model.Pixel
         .findOne(query, function (err, pixel) {
@@ -122,6 +153,12 @@ module.exports = function (app) {
                         });
                     }
                 });
+        });
+
+    app.route('/api/pixel/:id/requests')
+        .get(function (req, res) {
+            getRequestsPaginate(req, res);
+
         });
 
     app.route('/t/:id')

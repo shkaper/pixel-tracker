@@ -8,4 +8,8 @@ angular.module('pixelTrackerApp')
         return $resource(apiURL + 'pixel/:id');
 
     }])
+    .factory('RequestsForPixel', ['$resource', 'apiURL', function ($resource, apiURL) {
+        return $resource(apiURL + 'pixel/:id/requests');
+
+    }])
 ;

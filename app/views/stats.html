@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-12">
             <div class="panel-group">
-                <div ng-repeat="request in pixel.requests" class="panel panel-default">
+                <div ng-repeat="request in requests" class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="cursor-pointer" data-toggle="collapse" ng-click="toggleCollapsed(this)"
@@ -47,6 +47,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-6">Showing {{(requestsPerPage * (requestsPage - 1)) + 1}} to
+            {{requestsPerPage * requestsPage < requestsTotal ? requestsPerPage * requestsPage : requestsTotal}} of
+            {{requestsTotal}} requests
+        </div>
+        <div class="col-sm-6 align-right">
+            <nav>
+                <ul class="pagination">
+                    <li ng-class="{'disabled': requestsPage <= 1}">
+                        <a ng-class="{'cursor-pointer': requestsPage > 1}"
+                           ng-click="requestsPage === 1 || getRequestsPage(requestsPage - 1, requestsPerPage)"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li ng-class="{'active': ($index+1) === requestsPage}"
+                        ng-repeat="page in range(requestsPagesTotal) track by $index">
+                        <a class="cursor-pointer" ng-click="getRequestsPage($index + 1, requestsPerPage)">{{$index+1}}</a>
+                    </li>
+                    <li ng-class="{'disabled': requestsPage === requestsPagesTotal}">
+                        <a ng-class="{'cursor-pointer': requestsPage < requestsPagesTotal}"
+                           ng-click="requestsPage === requestsPagesTotal || getRequestsPage(requestsPage + 1, requestsPerPage)"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
     </div>
