@@ -24,6 +24,16 @@
         <div class="col-sm-4 col-sm-offset-4">
             <h2>Requests: <span class="badge">{{pixel.req_count}}</span></h2>
         </div>
+        <div class="col-sm-6">
+            <div class="pagination">
+                <label for="selectPages">Show </label>
+                <select id="selectPages" ng-model="requestsPerPage"
+                        ng-options="option for option in requestsPageOptions"
+                        ng-change="getRequestsPage(requestsPage, requestsPerPage)">
+                </select>
+                requests on page
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="panel-group">
                 <div ng-repeat="request in requests" class="panel panel-default">

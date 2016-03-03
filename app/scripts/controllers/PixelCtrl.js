@@ -47,12 +47,15 @@ angular.module('pixelTrackerApp')
         //pixels & pagination
 
         $scope.pixels = {};
+        $scope.pixelsPageOptions = [10, 15, 25, 50];
         $scope.pixelsPage = 1;
-        $scope.pixelsPerPage = 5;
+        $scope.pixelsPerPage = 10;
         $scope.pixelsPagesTotal = 1;
         $scope.pixelsTotal = 0;
 
         $scope.getPixelsPage = function (page, perPage) {
+            page = !page ? $scope.pixelsPage : page;
+            perPage = !perPage ? $scope.pixelsPerPage : perPage;
             Pixel.get(
                 {
                     perPage: perPage,

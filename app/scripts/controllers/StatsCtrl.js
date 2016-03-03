@@ -19,12 +19,15 @@ angular.module('pixelTrackerApp')
         //requests & pagination
 
         $scope.requests = {};
+        $scope.requestsPageOptions = [10, 15, 25, 50];
         $scope.requestsPage = 1;
         $scope.requestsPerPage = 10;
         $scope.requestsPagesTotal = 1;
         $scope.requestsTotal = 0;
 
         $scope.getRequestsPage = function (page, perPage) {
+            page = !page ? $scope.requestsPage : page;
+            perPage = !perPage ? $scope.requestsPerPage : perPage;
             RequestsForPixel.get(
                 {
                     id: $stateParams.id,

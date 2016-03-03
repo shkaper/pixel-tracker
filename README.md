@@ -10,10 +10,10 @@ Done:
 + Pixels serving
 + Implemented API
 + Configured Grunt tasks for dev purposes
++ Pagination
 
 TODO:
 + Stats design
-+ Pagination
 + Filtering and sorting
 + Authentication
 + Deployment to heroku

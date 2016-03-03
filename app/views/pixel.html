@@ -27,6 +27,16 @@
         </div>
     </div>
     <div class="row row-content">
+        <div class="col-sm-6">
+            <div class="pagination">
+                <label for="selectPages">Show </label>
+                <select id="selectPages" ng-model="pixelsPerPage"
+                        ng-options="option for option in pixelsPageOptions"
+                        ng-change="getPixelsPage(pixelsPage, pixelsPerPage)">
+                </select>
+                pixels on page
+            </div>
+        </div>
         <div class="col-sm-12">
             <table class="table table-striped table-hover table-bordered pixel-table">
                 <thead>
@@ -72,9 +82,12 @@
             </table>
         </div>
 
-        <div class="col-sm-6">Showing {{(pixelsPerPage * (pixelsPage - 1)) + 1}} to
-            {{pixelsPerPage * pixelsPage < pixelsTotal ? pixelsPerPage * pixelsPage : pixelsTotal}} of
-            {{pixelsTotal}} pixels
+        <div class="col-sm-6">
+            <div class="pagination">
+                Showing {{(pixelsPerPage * (pixelsPage - 1)) + 1}} to
+                {{pixelsPerPage * pixelsPage < pixelsTotal ? pixelsPerPage * pixelsPage : pixelsTotal}} of
+                {{pixelsTotal}} pixels
+            </div>
         </div>
         <div class="col-sm-6 align-right">
             <nav>
