@@ -29,7 +29,7 @@
                 <label for="selectPages">Show </label>
                 <select id="selectPages" ng-model="requestsPerPage"
                         ng-options="option for option in requestsPageOptions"
-                        ng-change="getRequestsPage(requestsPage, requestsPerPage)">
+                        ng-change="getRequestsPage()">
                 </select>
                 requests on page
             </div>
