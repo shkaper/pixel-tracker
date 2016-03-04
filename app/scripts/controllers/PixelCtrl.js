@@ -99,10 +99,6 @@ angular.module('pixelTrackerApp')
 
         $scope.getPixelsPage($scope.pixelsPage, $scope.pixelsPerPage);
 
-        $scope.range = function(n) {
-            return new Array(n);
-        };
-
         //table functions
 
         $scope.toggleInputOn = function (repeatScope) {

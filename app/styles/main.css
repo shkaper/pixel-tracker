@@ -131,6 +131,21 @@ table.pixel-table {
     margin-top: 15px;
 }
 
+.pagination > .disabled > a:hover {
+    cursor: default;
+    background-color: #eee;
+}
+.pagination > .disabled > a {
+    cursor: default;
+    background-color: #eee;
+}
+
+.pagination > li > span {
+    cursor: default;
+    background-color: transparent;
+    border: 0;
+}
+
 /* Stats */
 
 .panel-body {
