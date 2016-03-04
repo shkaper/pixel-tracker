@@ -1,6 +1,9 @@
 {
   "name": "pixeltracker",
   "private": true,
+  "scripts": {
+    "start": "grunt build && node server.js"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "body-parser": "^1.14.2",
