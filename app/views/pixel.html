@@ -99,9 +99,11 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li ng-class="{'active': ($index+1) === pixelsPage}"
-                        ng-repeat="page in range(pixelsPagesTotal) track by $index">
-                        <a class="cursor-pointer" ng-click="getPixelsPage($index + 1, pixelsPerPage)">{{$index+1}}</a>
+                    <li ng-class="{'active': page === pixelsPage}"
+                        ng-repeat="page in displayPages(pixelsPage, pixelsPagesTotal) track by $index">
+                        <a class="cursor-pointer" ng-click="getPixelsPage(page, pixelsPerPage)"
+                           ng-if="page !== 'blank'">{{page}}</a>
+                        <span ng-if="page === 'blank'">...</span>
                     </li>
                     <li ng-class="{'disabled': pixelsPage === pixelsPagesTotal}">
                         <a ng-class="{'cursor-pointer': pixelsPage < pixelsPagesTotal}"
