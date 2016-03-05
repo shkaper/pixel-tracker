@@ -3,6 +3,7 @@
 .yo-rc.json
 .editorconfig
 .gitattributes
+npm-debug.log
 /node_modules
 /dist
 /.tmp
