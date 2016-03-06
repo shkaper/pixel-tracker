@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .constant("apiURL", "http://localhost:3001/api/")
-    //.constant("apiURL", "http://5028484c.ngrok.io/api/")
-
-    .factory('Pixel', ['$resource', 'apiURL', function ($resource, apiURL) {
-        return $resource(apiURL + 'pixel/:id');
+    .factory('hostURL', function(){
+        return location.origin;
+    })
+    .factory('Pixel', ['$resource', 'hostURL', function ($resource, hostURL) {
+        return $resource(hostURL + '/api/pixel/:id');
 
     }])
-    .factory('RequestsForPixel', ['$resource', 'apiURL', function ($resource, apiURL) {
-        return $resource(apiURL + 'pixel/:id/requests');
+    .factory('RequestsForPixel', ['$resource', 'hostURL', function ($resource, hostURL) {
+        return $resource(hostURL + '/api/pixel/:id/requests');
 
     }])
 ;
