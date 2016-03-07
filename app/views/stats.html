@@ -7,12 +7,12 @@
             <form>
                 <div class="input-group input-group-lg col-sm-12">
                     <input class="form-control" id="URLInput" name="URLInput"
-                           placeholder="{{currentHostTracking + pixel._id + '.gif'}}" readonly>
+                           value="{{currentHostTracking + pixel._id + '.gif'}}" readonly>
 
                     <div class="input-group-btn">
                         <button class="btn btn-primary btn-lg btn-create"
                                 type="button" ngclipboard
-                                data-clipboard-text="{{currentHostTracking + pixel._id + '.gif'}}">
+                                data-clipboard-target="#URLInput">
                             Copy
                         </button>
                     </div>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-6">
             <div class="pagination">
-                <label for="selectPages">Show </label>
+                <span>Show </span>
                 <select id="selectPages" ng-model="requestsPerPage"
                         ng-options="option for option in requestsPageOptions"
                         ng-change="getRequestsPage()">
@@ -72,9 +72,11 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li ng-class="{'active': ($index+1) === requestsPage}"
-                        ng-repeat="page in range(requestsPagesTotal) track by $index">
-                        <a class="cursor-pointer" ng-click="getRequestsPage($index + 1, requestsPerPage)">{{$index+1}}</a>
+                    <li ng-class="{'active': page === requestsPage}"
+                        ng-repeat="page in displayPages(requestsPage, requestsPagesTotal) track by $index">
+                        <a class="cursor-pointer" ng-click="getRequestsPage(page, requestsPerPage)"
+                           ng-if="page !== 'blank'">{{page}}</a>
+                        <span ng-if="page === 'blank'">...</span>
                     </li>
                     <li ng-class="{'disabled': requestsPage === requestsPagesTotal}">
                         <a ng-class="{'cursor-pointer': requestsPage < requestsPagesTotal}"

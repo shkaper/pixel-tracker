@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .controller('StatsCtrl', ['$rootScope', '$scope', '$stateParams', 'Pixel', 'RequestsForPixel', function ($rootScope, $scope, $stateParams, Pixel, RequestsForPixel) {
+    .controller('StatsCtrl', ['$rootScope', '$scope', '$stateParams', 'Pixel', 'RequestsForPixel', 'URLFactory', 'PageFactory', function ($rootScope, $scope, $stateParams, Pixel, RequestsForPixel, URLFactory, PageFactory) {
 
         $rootScope.pageTitle = 'Pixel';
 
-        var currentHost = location.host;
-        $scope.currentHostTracking = currentHost + '/t/';
+        $scope.currentHostTracking = URLFactory.getHost() + '/t/';
 
         $scope.pixel = Pixel.get({id: $stateParams.id}).$promise.then(
             function (response) {
@@ -47,6 +46,8 @@ angular.module('pixelTrackerApp')
                     //TODO: handle error
                 });
         };
+
+        $scope.displayPages = PageFactory.displayPages;
 
         //init table
 

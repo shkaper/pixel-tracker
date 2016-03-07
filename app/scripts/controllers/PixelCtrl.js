@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .controller('PixelCtrl', ['$rootScope', '$scope', 'Pixel', '$timeout', function ($rootScope, $scope, Pixel, $timeout) {
+    .controller('PixelCtrl', ['$rootScope', '$scope', 'Pixel', '$timeout', 'URLFactory', 'PageFactory', function ($rootScope, $scope, Pixel, $timeout, URLFactory, PageFactory) { //jshint ignore:line
 
         $rootScope.pageTitle = 'Pixel';
 
-        var currentHost = location.host;
-        $scope.currentHostTracking = currentHost + '/t/';
+        $scope.currentHostTracking = URLFactory.getHost() + '/t/';
 
         $scope.pixelCreated = false;
         $scope.pixelName = '';
@@ -75,25 +74,7 @@ angular.module('pixelTrackerApp')
                 });
         };
 
-        $scope.displayPages = function(currentPage, totalPages) {
-            var arr = [1];
-            for (var i = currentPage - 1; i <= currentPage + 1; ++i) {
-                if (i > 1 && i < totalPages) {
-                    arr.push(i);
-                }
-            }
-            if (arr.indexOf(totalPages) === -1) {
-                arr = arr.concat(totalPages);
-            }
-            if ((arr[1] - 1) > arr[0]) {
-                arr.splice(1, 0, "blank");
-            }
-            if ((arr[arr.length - 1] - 1) > arr[arr.length - 2]) {
-                arr.splice(arr.length - 1, 0, "blank");
-            }
-            console.log(arr);
-            return arr;
-        };
+        $scope.displayPages = PageFactory.displayPages;
 
         //init table
 
