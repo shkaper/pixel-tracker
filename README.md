@@ -3,6 +3,9 @@
 A web tool that lets users create pixels and track requests.
 Utilizes MEAN stack (MongoDB, Express, AngularJS, NodeJS).
 
+View it on <a href="http://pixel-tracker-app.herokuapp.com/#/pixel">heroku</a>
+<img src="http://pixel-tracker-app.herokuapp.com/t/56dcda6671de51110009c034.gif">
+
 ## Current state
 
 Done:
@@ -11,12 +14,12 @@ Done:
 + Implemented API
 + Configured Grunt tasks for dev purposes
 + Pagination
++ Deployment to heroku
 
 TODO:
 + Stats design
 + Filtering and sorting
 + Authentication
-+ Deployment to heroku
 
 ## Build and development
 
