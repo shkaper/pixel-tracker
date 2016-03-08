@@ -170,21 +170,6 @@ h2 span.badge {
     text-align: right;
 }
 
-.loading {
-    position: relative;
-}
-
-.loading:before {
-    position: absolute;
-    content: "Loading...";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(250, 250, 250, 0.9);
-    z-index: 1;
-    text-align: center;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
@@ -216,5 +201,52 @@ h2 span.badge {
 
     table.table tr:hover td div.btn-group {
         display: inline-block;
+    }
+}
+
+/* Loader */
+
+.loading {
+    position: relative;
+}
+
+.loading:before {
+    position: absolute;
+    content: "Loading, please wait...";
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    background-color: rgba(250, 250, 250, 0.9);
+    z-index: 1;
+    text-align: center;
+    color: #ababab;
+}
+
+.arc-loading {
+    position: absolute;
+    border: 4px solid;
+    border-color: transparent #FFF #FFF #FFF;
+    border-radius: 50%;
+    margin-left: 45%;
+    margin-top: 25px;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    -webkit-animation: single-arc-rotate 1s infinite linear;
+    animation: single-arc-rotate 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@-webkit-keyframes single-arc-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes single-arc-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
