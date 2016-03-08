@@ -51,10 +51,12 @@ angular.module('pixelTrackerApp')
         $scope.pixelsPerPage = 10;
         $scope.pixelsPagesTotal = 1;
         $scope.pixelsTotal = 0;
+        $scope.pixelsLoading = false;
 
         $scope.getPixelsPage = function (page, perPage) {
             page = !page ? $scope.pixelsPage : page;
             perPage = !perPage ? $scope.pixelsPerPage : perPage;
+            $scope.pixelsLoading = true;
             Pixel.get(
                 {
                     perPage: perPage,
@@ -68,9 +70,11 @@ angular.module('pixelTrackerApp')
                     console.log("pixels ", response.pixels);
                     console.log("page ", response.page);
                     console.log("pagesTotal ", response.pagesTotal);
+                        $scope.pixelsLoading = false;
                 },
                 function () {
                     //TODO: handle error
+                    $scope.pixelsLoading = false;
                 });
         };
 
