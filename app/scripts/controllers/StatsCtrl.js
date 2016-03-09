@@ -7,12 +7,16 @@ angular.module('pixelTrackerApp')
 
         $scope.currentHostTracking = URLFactory.getHost() + '/t/';
 
+        $scope.pixelsLoading = true;
+
         $scope.pixel = Pixel.get({id: $stateParams.id}).$promise.then(
             function (response) {
                 $scope.pixel = response;
+                $scope.pixelsLoading = false;
             },
             function () {
                 //TODO: handle error
+                $scope.pixelsLoading = false;
             });
 
         //requests & pagination
@@ -23,10 +27,12 @@ angular.module('pixelTrackerApp')
         $scope.requestsPerPage = 10;
         $scope.requestsPagesTotal = 1;
         $scope.requestsTotal = 0;
+        $scope.requestsLoading = false;
 
         $scope.getRequestsPage = function (page, perPage) {
-            page = !page ? $scope.requestsPage : page;
-            perPage = !perPage ? $scope.requestsPerPage : perPage;
+            page = page || $scope.requestsPage;
+            perPage = perPage || $scope.requestsPerPage;
+            $scope.requestsLoading = true;
             RequestsForPixel.get(
                 {
                     id: $stateParams.id,
@@ -41,9 +47,11 @@ angular.module('pixelTrackerApp')
                     for (var i = 0; i < $scope.requests.length; ++i) {
                         $scope.requests[i].clientHeaders = JSON.stringify(JSON.parse($scope.requests[i].clientHeaders), null, 2);
                     }
+                    $scope.requestsLoading = false;
                 },
                 function () {
                     //TODO: handle error
+                    $scope.requestsLoading = false;
                 });
         };
 

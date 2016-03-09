@@ -232,12 +232,12 @@ h2 span.badge {
     position: relative;
     display: inline-block;
     border: 4px solid;
-    border-color: transparent #FFF #FFF #FFF;
+    border-color: transparent #ababab #ababab #ababab;
     border-radius: 50%;
     width: 25px;
     height: 25px;
     z-index: 7;
-    -webkit-animation: single-arc-rotate 1s infinite linear;
+    -webkit-animation: single-arc-rotate 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
     animation: single-arc-rotate 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 

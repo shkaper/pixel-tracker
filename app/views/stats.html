@@ -1,5 +1,9 @@
 <div class="container" ng-controller="StatsCtrl">
-    <div class="row row-content">
+    <div class="row row-content" ng-class="{'loading': pixelsLoading}">
+        <div class="container-loading" ng-show="pixelsLoading">
+            <div class="arc-loading"></div>
+            <span class="text-loading">Loading...</span>
+        </div>
         <div class="page-header text-center">
             <h1>Pixel statistics: {{pixel.name}}</h1>
         </div>
@@ -19,11 +23,11 @@
                 </div>
             </form>
         </div>
-    </div>
-    <div class="row row-content">
         <div class="col-sm-4 col-sm-offset-4">
             <h2>Requests: <span class="badge">{{pixel.req_count}}</span></h2>
         </div>
+    </div>
+    <div class="row row-content">
         <div class="col-sm-6">
             <div class="pagination">
                 <span>Show </span>
@@ -34,7 +38,11 @@
                 requests on page
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12" ng-class="{'loading': requestsLoading}">
+            <div class="container-loading" ng-show="requestsLoading">
+                <div class="arc-loading"></div>
+                <span class="text-loading">Loading...</span>
+            </div>
             <div class="panel-group">
                 <div ng-repeat="request in requests" class="panel panel-default">
                     <div class="panel-heading">

@@ -54,8 +54,8 @@ angular.module('pixelTrackerApp')
         $scope.pixelsLoading = false;
 
         $scope.getPixelsPage = function (page, perPage) {
-            page = !page ? $scope.pixelsPage : page;
-            perPage = !perPage ? $scope.pixelsPerPage : perPage;
+            page = page || $scope.pixelsPage;
+            perPage = perPage || $scope.pixelsPerPage;
             $scope.pixelsLoading = true;
             Pixel.get(
                 {
