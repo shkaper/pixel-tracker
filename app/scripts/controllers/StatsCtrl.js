@@ -33,6 +33,12 @@ angular.module('pixelTrackerApp')
             page = page || $scope.requestsPage;
             perPage = perPage || $scope.requestsPerPage;
             $scope.requestsLoading = true;
+
+            //wait for 500ms after sending request; if no response comes back, show loader
+            var requestTimer = $timeout(function(){
+                $scope.requestsLoading = true;
+            }, 500);
+
             RequestsForPixel.get(
                 {
                     id: $stateParams.id,
@@ -47,10 +53,12 @@ angular.module('pixelTrackerApp')
                     for (var i = 0; i < $scope.requests.length; ++i) {
                         $scope.requests[i].clientHeaders = JSON.stringify(JSON.parse($scope.requests[i].clientHeaders), null, 2);
                     }
+                    $timeout.cancel(requestTimer); //cancel request timer
                     $scope.requestsLoading = false;
                 },
                 function () {
                     //TODO: handle error
+                    $timeout.cancel(requestTimer); //cancel request timer
                     $scope.requestsLoading = false;
                 });
         };

@@ -57,6 +57,12 @@ angular.module('pixelTrackerApp')
             page = page || $scope.pixelsPage;
             perPage = perPage || $scope.pixelsPerPage;
             $scope.pixelsLoading = true;
+
+            //wait for 500ms after sending request; if no response comes back, show loader
+            var requestTimer = $timeout(function(){
+                $scope.pixelsLoading = true;
+            }, 500);
+
             Pixel.get(
                 {
                     perPage: perPage,
@@ -67,6 +73,8 @@ angular.module('pixelTrackerApp')
                     $scope.pixelsPage = response.page;
                     $scope.pixelsPagesTotal = response.pagesTotal;
                     $scope.pixelsTotal = response.pixelsCount;
+                    $timeout.cancel(requestTimer); //cancel request timer
+                    $scope.pixelsLoading = false;
                     console.log("pixels ", response.pixels);
                     console.log("page ", response.page);
                     console.log("pagesTotal ", response.pagesTotal);
@@ -74,6 +82,7 @@ angular.module('pixelTrackerApp')
                 },
                 function () {
                     //TODO: handle error
+                    $timeout.cancel(requestTimer); //cancel request timer
                     $scope.pixelsLoading = false;
                 });
         };
