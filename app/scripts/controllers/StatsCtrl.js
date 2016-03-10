@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .controller('StatsCtrl', ['$rootScope', '$scope', '$stateParams', 'Pixel', 'RequestsForPixel', 'URLFactory', 'PageFactory', function ($rootScope, $scope, $stateParams, Pixel, RequestsForPixel, URLFactory, PageFactory) {
+    .controller('StatsCtrl', ['$rootScope', '$scope', '$stateParams', 'Pixel', 'RequestsForPixel', 'URLFactory', 'PageFactory', '$timeout', function ($rootScope, $scope, $stateParams, Pixel, RequestsForPixel, URLFactory, PageFactory, $timeout) { //jshint ignore:line
 
         $rootScope.pageTitle = 'Pixel';
 
