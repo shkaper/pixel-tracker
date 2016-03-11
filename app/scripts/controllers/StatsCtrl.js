@@ -68,10 +68,6 @@ angular.module('pixelTrackerApp')
 
         $scope.getRequestsPage($scope.requestsPage, $scope.requestsPerPage);
 
-        $scope.range = function (n) {
-            return new Array(n);
-        };
-
         $scope.removePixel = function (id) {
             Pixel.remove({id: id}).$promise.then(
                 function () {

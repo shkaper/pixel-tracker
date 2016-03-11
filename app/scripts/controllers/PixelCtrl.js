@@ -56,7 +56,6 @@ angular.module('pixelTrackerApp')
         $scope.getPixelsPage = function (page, perPage) {
             page = page || $scope.pixelsPage;
             perPage = perPage || $scope.pixelsPerPage;
-            $scope.pixelsLoading = true;
 
             //wait for 500ms after sending request; if no response comes back, show loader
             var requestTimer = $timeout(function(){
