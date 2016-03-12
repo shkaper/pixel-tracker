@@ -18,9 +18,13 @@ angular.module('pixelTrackerApp')
             $scope.pixelCreated = false;
         };
 
+        $scope.createPixelLoading = false;
+
         $scope.createPixel = function () {
+            $scope.createPixelLoading = true;
             newPixel.name = $scope.pixelName;
             Pixel.save(newPixel, function (pixelRet) {
+                $scope.createPixelLoading = false;
                 $scope.pixels.unshift(pixelRet);
                 $scope.pixelCreated = true;
                 $scope.newPixelForm.nameInput.$setPristine();

@@ -13,8 +13,11 @@
 
                     <div class="input-group-btn">
                         <button ng-click="createPixel()" ng-if="newPixelForm.nameInput.$dirty || !pixelCreated"
-                                class="btn btn-success btn-lg btn-create" type="button">
-                            Create
+                                class="btn btn-success btn-lg btn-create"
+                                ng-class="{'btn-loading': createPixelLoading, 'btn-success': !createPixelLoading}"
+                                type="button">
+                            <span ng-show="!createPixelLoading">Create</span>
+                            <div class="arc-loading" ng-show="createPixelLoading"></div>
                         </button>
                         <button ng-if="pixelCreated && newPixelForm.nameInput.$pristine"
                                 class="btn btn-warning btn-lg btn-create"
