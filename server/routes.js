@@ -9,22 +9,25 @@ function getPixelsPaginate(req, res) {
         page = Math.max(1, req.query.page);
 
     Model.Pixel
-        .find()
-        .sort('-created_at')
-        .limit(perPage)
-        .skip(perPage * (page - 1))
-        .exec(function (err, pixels) {
+        .count()
+        .exec(function (err, count) {
             if (err) {
                 res.send(err);
             } else {
+                var pagesTotal = Math.ceil(count / perPage);
+                page = Math.min(page, pagesTotal);
                 Model.Pixel
-                    .count(function (err, count) {
+                    .find()
+                    .sort('-created_at')
+                    .limit(perPage)
+                    .skip(perPage * (page - 1))
+                    .exec(function (err, pixels) {
                         if (err) {
                             res.send(err);
                         } else {
                             res.json({
                                 page: page,
-                                pagesTotal: Math.ceil(count / perPage),
+                                pagesTotal: pagesTotal,
                                 pixelsCount: count,
                                 pixels: pixels
                             })
