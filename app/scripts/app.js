@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
+angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard', 'ngAnimate'])
     .run(function ($rootScope) {
         $rootScope.pageTitle = 'Home';
     })

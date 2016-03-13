@@ -270,3 +270,37 @@ h2 span.badge {
         transform: rotate(360deg);
     }
 }
+
+.pixel-row.ng-enter,
+.pixel-row.ng-leave,
+.pixel-row.ng-move {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+.pixel-row.ng-enter,
+.pixel-row.ng-move {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.pixel-row.ng-move.ng-move-active,
+.pixel-row.ng-enter.ng-enter-active {
+    opacity: 1;
+    /*height: 120px;*/
+}
+
+.pixel-row.ng-leave {
+    opacity: 1;
+    overflow: hidden;
+}
+
+.pixel-row.ng-leave.ng-leave-active {
+    opacity: 0;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
