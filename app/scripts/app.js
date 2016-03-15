@@ -96,4 +96,18 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
                 });
             }
         };
-    });
+    })
+    .directive('pxlLoadmask', function($compile) { //jshint ignore : line
+        return {
+            restrict: 'A',
+            scope: {
+                pxlLoadmaskOn: '='
+            },
+            link: function(scope, elem, attrs) {
+                scope.$watch('pxlLoadmaskOn', function(newval, oldval) { //jshint ignore : line
+                    elem.toggleClass('loading', !!newval);
+                }, true);
+            }
+        };
+    })
+;
