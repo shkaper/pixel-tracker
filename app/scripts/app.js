@@ -97,16 +97,27 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
             }
         };
     })
-    .directive('pxlLoadmask', function($compile) { //jshint ignore : line
+    /*
+     * <ANY pxl-loadmask-on="expression"> ... </ANY>
+     * If the expression is truthy then the element gets class="loading".
+     * A div with spinner and 'Loading...' is added as the first element's child
+     * and remains visible as long as the expression stays truthy.
+     */
+    .directive('pxlLoadmaskOn', function () {
         return {
             restrict: 'A',
             scope: {
                 pxlLoadmaskOn: '='
             },
-            link: function(scope, elem, attrs) {
-                scope.$watch('pxlLoadmaskOn', function(newval, oldval) { //jshint ignore : line
-                    elem.toggleClass('loading', !!newval);
-                }, true);
+            compile: function (element, attrs) {
+                console.log("pxlLoadmaskOn compile: ", attrs.pxlLoadmaskOn);
+                var el = '<div class="container-loading" ng-if="' + attrs.pxlLoadmaskOn + '"><div class="arc-loading"></div><span class="text-loading">Loading...</span></div>';
+                element.prepend(el);
+                return function postLink(scope, compiledElement) {
+                    scope.$watch('pxlLoadmaskOn', function (newval) {
+                        compiledElement.toggleClass('loading', !!newval);
+                    }, true);
+                };
             }
         };
     })

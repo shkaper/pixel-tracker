@@ -1,9 +1,5 @@
 <div class="container">
-    <div class="row row-content" ng-class="{'loading': pixelsLoading}">
-        <div class="container-loading" ng-show="pixelsLoading">
-            <div class="arc-loading"></div>
-            <span class="text-loading">Loading...</span>
-        </div>
+    <div class="row row-content" pxl-loadmask-on="pixelsLoading">
         <div class="page-header text-center">
             <h1>Pixel statistics: {{pixel.name}}</h1>
         </div>
@@ -38,11 +34,7 @@
                 requests on page
             </div>
         </div>
-        <div class="col-sm-12" ng-class="{'loading': requestsLoading}">
-            <div class="container-loading" ng-show="requestsLoading">
-                <div class="arc-loading"></div>
-                <span class="text-loading">Loading...</span>
-            </div>
+        <div class="col-sm-12" pxl-loadmask-on="requestsLoading">
             <div class="panel-group">
                 <div ng-repeat="request in requests" class="panel panel-default">
                     <div class="panel-heading">
