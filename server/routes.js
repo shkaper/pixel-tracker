@@ -179,10 +179,18 @@ module.exports = function (app) {
                     } else {
                         res.type('gif');
                         res.send(IMAGE);
+
+                        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+                        if (ip.indexOf("::ffff:") === 0) { //remove prefix for IPv4-mapped IPv6 addresses
+                            ip.replace("::ffff:", "");
+                        }
+                        if (ip === "::1") { // "::1" is "127.0.0.1" in IPv6
+                            ip = "localhost";
+                        }
                         var date = new Date();
                         var request = new Model.Request({
                             _pixel: pixel._id,
-                            clientIp: req.ip,
+                            clientIp: ip,
                             clientHeaders: JSON.stringify(req.headers),
                             timestamp: date.toUTCString()
                         });
