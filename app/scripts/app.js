@@ -110,7 +110,6 @@ angular.module('pixelTrackerApp', ['ui.router', 'ngResource', 'ngclipboard'])
                 pxlLoadmaskOn: '='
             },
             compile: function (element, attrs) {
-                console.log("pxlLoadmaskOn compile: ", attrs.pxlLoadmaskOn);
                 var el = '<div class="container-loading" ng-if="' + attrs.pxlLoadmaskOn + '"><div class="arc-loading"></div><span class="text-loading">Loading...</span></div>';
                 element.prepend(el);
                 return function postLink(scope, compiledElement) {

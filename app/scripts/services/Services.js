@@ -42,7 +42,6 @@ angular.module('pixelTrackerApp')
                 if ((arr[arr.length - 1] - 1) > arr[arr.length - 2]) {
                     arr.splice(arr.length - 1, 0, "blank");
                 }
-                console.log(arr);
                 return arr;
             }
         };

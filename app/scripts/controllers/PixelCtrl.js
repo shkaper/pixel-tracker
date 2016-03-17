@@ -78,10 +78,6 @@ angular.module('pixelTrackerApp')
                     $scope.pixelsTotal = response.pixelsCount;
                     $timeout.cancel(requestTimer); //cancel request timer
                     $scope.pixelsLoading = false;
-                    console.log("pixels ", response.pixels);
-                    console.log("page ", response.page);
-                    console.log("pagesTotal ", response.pagesTotal);
-                        $scope.pixelsLoading = false;
                 },
                 function () {
                     //TODO: handle error
