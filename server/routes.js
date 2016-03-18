@@ -113,12 +113,11 @@ module.exports = function (app) {
         })
         .post(function (req, res) {
             var pixel = new Model.Pixel();      // create a new instance of the Pixel model
-            if (req.body.name !== '') {
+            if (req.body.name && req.body.name !== '') {
                 pixel.name = req.body.name;  // set the pixel name (comes from the request)
             } else {
-                pixel.name = Date.now().toString();
+                pixel.name = "pixel" + Date.now().toString();
             }
-
             // save the pixel and check for errors
             pixel.save(function (err, pixelRet) {
                 if (err) {
@@ -141,12 +140,14 @@ module.exports = function (app) {
                     } else if (pixel === null) {
                         res.sendStatus(404);
                     } else {
+                        //remove all requests associated with pixel
                         Model.Request
                             .remove({_id: {$in: pixel.requests}}, function (err) {
                                 if (err) {
                                     console.log("Error deleting requests", err);
                                 }
                             });
+                        //remove pixel
                         pixel.remove(function (err) {
                             if (err) {
                                 res.status(500).send(err);
