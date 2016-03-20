@@ -9,6 +9,7 @@
     "autoprefixer-core": "^5.2.1",
     "body-parser": "^1.14.2",
     "bower": "1.7.7",
+    "cookie-parser": "1.4.1",
     "express": "^4.13.4",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
@@ -31,6 +32,9 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.4.2",
     "morgan": "^1.6.1",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "passport-local-mongoose": "4.0.0",
     "time-grunt": "^1.0.0"
   },
   "devDependencies": {
