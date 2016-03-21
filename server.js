@@ -5,8 +5,22 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var cookieParser = require('cookie-parser');
 
-// configuration ===========================================
+// configuration ====================================================
+
+app.use(cookieParser());
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // log every request to the console
 app.use(morgan('dev'));
@@ -27,10 +41,18 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /dist/img will be /img for users
 app.use(express.static(__dirname + '/dist'));
 
-// routes ==================================================
+// passport config ==================================================
+
+var Account = require('./server/models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+// routes ===========================================================
+
 require('./server/routes')(app); // configure our routes
 
-// connect to db and start app ===============================================
+// connect to db and start app ======================================
 
 var dbURI = process.env.MONGOLAB_URI || 'mongodb://localhost/pixels_temp';
 
