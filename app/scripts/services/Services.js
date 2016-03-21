@@ -46,4 +46,98 @@ angular.module('pixelTrackerApp')
             }
         };
     })
+    .factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+
+        // create user variable
+        var user = null;
+
+        return {
+            isLoggedIn: function () {
+                return user ? true : false;
+            },
+
+            getUserStatus: function () {
+                return user;
+            },
+
+            login: function (username, password) {
+
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a post request to the server
+                $http.post('/user/login',
+                    {username: username, password: password})
+                    // handle success
+                    .success(function (data, status) {
+                        if (status === 200 && data.status) {
+                            user = true;
+                            deferred.resolve();
+                        } else {
+                            user = false;
+                            deferred.reject();
+                        }
+                    })
+                    // handle error
+                    .error(function () {
+                        user = false;
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            },
+
+            logout: function () {
+
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a get request to the server
+                $http.get('/user/logout')
+                    // handle success
+                    .success(function () {
+                        user = false;
+                        deferred.resolve();
+                    })
+                    // handle error
+                    .error(function () {
+                        user = false;
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            },
+
+            register: function (username, password) {
+
+                // create a new instance of deferred
+                var deferred = $q.defer();
+
+                // send a post request to the server
+                $http.post('/user/register',
+                    {username: username, password: password})
+                    // handle success
+                    .success(function (data, status) {
+                        if (status === 200 && data.status) {
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                        }
+                    })
+                    // handle error
+                    .error(function () {
+                        deferred.reject();
+                    });
+
+                // return promise object
+                return deferred.promise;
+
+            }
+        };
+
+    }])
 ;
