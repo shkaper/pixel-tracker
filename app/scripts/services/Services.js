@@ -66,7 +66,7 @@ angular.module('pixelTrackerApp')
                 var deferred = $q.defer();
 
                 // send a post request to the server
-                $http.post('/user/login',
+                $http.post('/login',
                     {username: username, password: password})
                     // handle success
                     .success(function (data, status) {
@@ -95,7 +95,7 @@ angular.module('pixelTrackerApp')
                 var deferred = $q.defer();
 
                 // send a get request to the server
-                $http.get('/user/logout')
+                $http.get('/logout')
                     // handle success
                     .success(function () {
                         user = false;
@@ -118,7 +118,7 @@ angular.module('pixelTrackerApp')
                 var deferred = $q.defer();
 
                 // send a post request to the server
-                $http.post('/user/register',
+                $http.post('/register',
                     {username: username, password: password})
                     // handle success
                     .success(function (data, status) {

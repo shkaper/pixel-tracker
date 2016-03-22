@@ -16,10 +16,37 @@
 
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li ng-class="{'active': activeHome()}"><a ui-sref="app">Home</a></li>
                     <li ng-class="{'active': activePixel()}"><a ui-sref="app.pixel">Create&amp;Track</a></li>
+                    <li><a class="cursor-pointer" data-toggle="modal" data-target="#myModal">Login</a></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="LoginCtrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" pxl-modal>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+                <form class="form" ng-submit="login()">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" ng-model="loginForm.username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="loginForm.password" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-default" ng-disabled="disabled">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

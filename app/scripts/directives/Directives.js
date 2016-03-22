@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('pixelTrackerApp')
-    .directive('focusOn', function($parse, $timeout) {
+    .directive('focusOn', function ($parse, $timeout) {
         var NON_ASSIGNABLE_MODEL_EXPRESSION = 'Non-assignable model expression: ';
         return {
             restrict: "A",
-            link: function(scope, element, attr) {
-                var buildGetterSetter = function(name) {
+            link: function (scope, element, attr) {
+                var buildGetterSetter = function (name) {
                     var me = {};
                     me.get = $parse(name);
                     me.set = me.get.assign;
@@ -25,22 +25,22 @@ angular.module('pixelTrackerApp')
                 focusState.set(scope, false);
 
                 // $watch the trigger variable in the controller for a transition
-                scope.$watch(focusStateName, function(newValue, oldValue) { // jshint ignore : line
-                    if ( newValue ) {
-                        $timeout(function() { // a timing workaround hack
+                scope.$watch(focusStateName, function (newValue, oldValue) { // jshint ignore : line
+                    if (newValue) {
+                        $timeout(function () { // a timing workaround hack
                             element[0].focus(); // without jQuery, need [0]
                         });
                     }
                 });
 
                 // wire up listeners for focus and blur events so that we can track the state
-                element.bind('focus', function() {
-                    scope.$apply(function() {
+                element.bind('focus', function () {
+                    scope.$apply(function () {
                         focusState.set(scope, true);
                     });
                 });
-                element.bind('blur', function() {
-                    scope.$apply(function() {
+                element.bind('blur', function () {
+                    scope.$apply(function () {
                         focusState.set(scope, false);
                     });
                 });
@@ -66,6 +66,16 @@ angular.module('pixelTrackerApp')
                     scope.$watch('pxlLoadmaskOn', function (newval) {
                         compiledElement.toggleClass('loading', !!newval);
                     }, true);
+                };
+            }
+        };
+    })
+    .directive('pxlModal', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                scope.dismissModal = function () {
+                    element.modal('hide');
                 };
             }
         };
