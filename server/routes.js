@@ -5,7 +5,7 @@ var Request = require('./models/pixel');
 const IMAGE = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAgEAAMEBAA7', 'base64'); //1x1 transparent gif converted to base64
 
 function getPixelsPaginate(req, res) {
-    var perPage = req.query.perPage,
+    var perPage = parseInt(req.query.perPage, 10),
         page = Math.max(1, req.query.page);
 
     Model.Pixel
